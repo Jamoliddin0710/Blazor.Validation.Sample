@@ -1,0 +1,130 @@
+﻿@page "/touristregister"
+@using Blazorise;
+@using Task2.Model.DTO
+<h5>Путешественники</h5>
+
+<div class="main">
+    <Validations Model="@_personDto" Mode="ValidationMode.Auto" @ref="_validations">
+        <div class="row fields-row">
+            <Validation Validator="IsValid">
+                <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                    <FieldLabel>Tug'ilgan kun</FieldLabel>
+                    <DateEdit @bind-Date="@_personDto.BirthDate">
+                        <Feedback>
+                            <ValidationError></ValidationError>
+                        </Feedback>
+                    </DateEdit>
+                </Field>
+            </Validation>
+            <Validation Validator="ValidationRule.IsNotEmpty">
+                <Field ColumnSize="ColumnSize.Is1">
+                    <FieldLabel>Yosh</FieldLabel>
+                    <TextEdit @bind-Text="@_personDto.Age">
+                        <Feedback>
+                            <ValidationError></ValidationError>
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+            </Validation>
+            <Validation Validator="@IsValid">
+                <Field ColumnSize="ColumnSize.Is3">
+                    <FieldLabel Style="text-align: center">Pasport seriya nomeri </FieldLabel>
+                    <div class="d-flex">
+                        <TextEdit @bind-Text="@_personDto.PasportSeriaNumber"></TextEdit>
+                        <TextEdit @bind-Text="@_personDto.PasportSeriaNumber"></TextEdit>
+                    </div>
+                </Field>
+            </Validation>
+
+            <Field ColumnSize="ColumnSize.Is2">
+                <FieldLabel>PINFL</FieldLabel>
+                <TextEdit @onchange="UpdatePNFL" @bind-Text="@_personDto.PNFL"></TextEdit>
+            </Field>
+
+            <Field ColumnSize="ColumnSize.Is3">
+                <FieldLabel></FieldLabel>
+                <div class="d-flex">
+                    <Button Color="Color.Primary">Qidirish</Button>
+                    <Button Style="margin-left: 13px" Color="Color.Warning">Aniqlash</Button>
+                </div>
+            </Field>
+        </div>
+        <div Class="row">
+            <Validation Validator="ValidationRule.IsNotEmpty">
+                <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                    <FieldLabel>Ism</FieldLabel>
+                    <TextEdit @bind-Text="@_personDto.FirstName">
+                        <Feedback>
+                            <ValidationError></ValidationError>
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+            </Validation>
+            <Validation Validator="ValidationRule.IsNotEmpty">
+                <Field ColumnSize="ColumnSize.Is3">
+                    <FieldLabel>Familiya</FieldLabel>
+                    <TextEdit @bind-Text="@_personDto.LastName">
+                        <Feedback>
+                            <ValidationError></ValidationError>
+                        </Feedback>
+                    </TextEdit>
+                </Field>
+            </Validation>
+            <Field @bind-Text="@_personDto.Patronymic" ColumnSize="ColumnSize.Is3">
+                <FieldLabel>Otasining ismi </FieldLabel>
+                <TextEdit></TextEdit>
+            </Field>
+
+            <Field ColumnSize="ColumnSize.Is3">
+                <FieldLabel>Koeffitsent</FieldLabel>
+                <div class="d-flex">
+                    <Button Width="Width.Is25" Color="Color.Primary"></Button>
+                    <Button Style="margin-left: 33px" Color="Color.Danger">O'chirish</Button>
+                </div>
+            </Field>
+        </div>
+    </Validations>
+</div>
+
+@code {
+    PersonDTO _personDto = new PersonDTO();
+    private Validations _validations = new Validations();
+
+    public void Reset()
+    {
+        _validations.ClearAll();
+        _validations.ValidateAll();
+        StateHasChanged();
+    }
+
+    void IsValid(ValidatorEventArgs e)
+    {
+        var value = Convert.ToString(e.Value);
+        if (string.IsNullOrEmpty(value))
+        {
+            e.Status = (string.IsNullOrEmpty(_personDto.PNFL)) ? ValidationStatus.Error : ValidationStatus.None;
+            return;
+        }
+        e.Status = ValidationStatus.None;
+        StateHasChanged();
+    }
+
+    void UpdatePNFL(ChangeEventArgs e)
+    {
+        _personDto.PNFL = Convert.ToString(e.Value);
+        Reset();
+    }
+
+}
+
+
+<style>
+    .main{
+    border:1px solid red;
+    border-radius: 5px;
+    padding: 10px;
+    }
+    .fields-row{
+    margin-bottom: 15px;
+    }
+</style>

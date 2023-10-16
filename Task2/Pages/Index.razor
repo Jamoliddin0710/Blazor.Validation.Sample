@@ -6,12 +6,11 @@
 
 
 <h5>Owner information</h5>
-<div class="row top-10">
+<div class=" row top-10">
     <div class="col-2">
         <div class="d-flex">
             <Button Color="Color.Secondary">Person</Button>
             <Button Color="Color.Primary">Organization</Button>
-
         </div>
     </div>
     <div class="col-8">
@@ -27,7 +26,6 @@
     </div>
 </div>
 <Validations Mode="ValidationMode.Auto" Model="userDto" @ref="_validations">
-
     <div class="row top-10" style="margin-top: 50px">
         <Validation>
             <Field ColumnSize="ColumnSize.Is2.OnDesktop">
@@ -166,7 +164,7 @@
                 </TextEdit>
             </Field>
         </Validation>
-        <Validation Validator="ValidationRule.">
+        <Validation Validator="ValidationRule.IsEmail">
             <Field ColumnSize="ColumnSize.Is3">
                 <FieldLabel>E-mail</FieldLabel>
                 <TextEdit @bind-Text="@userDto.Email"></TextEdit>
@@ -220,8 +218,6 @@
         _validations.ValidateAll();
         StateHasChanged();
     }
-
-
 }
 
 <style>
