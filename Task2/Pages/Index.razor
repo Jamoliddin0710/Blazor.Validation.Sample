@@ -1,0 +1,231 @@
+﻿@using Blazorise;
+@using System.ComponentModel.DataAnnotations;
+@using Task2.Model.DTO
+@using Task2.Model.Enum
+@page "/"
+
+
+<h5>Owner information</h5>
+<div class="row top-10">
+    <div class="col-2">
+        <div class="d-flex">
+            <Button Color="Color.Secondary">Person</Button>
+            <Button Color="Color.Primary">Organization</Button>
+
+        </div>
+    </div>
+    <div class="col-8">
+    </div>
+    <div class="col-2">
+        <div class="d-flex">
+            <Button Color="Color.Default">Clear</Button>
+            <Select TValue="ECitizenship" @bind-Text="userDto.Citizenship" @oninput="UpdateCitizenship">
+                <SelectItem Value="@ECitizenship.Resident">Resident</SelectItem>
+                <SelectItem Value="@ECitizenship.Foreign_Resident">Foreign Resident</SelectItem>
+            </Select>
+        </div>
+    </div>
+</div>
+<Validations Mode="ValidationMode.Auto" Model="userDto" @ref="_validations">
+
+    <div class="row top-10" style="margin-top: 50px">
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is2.OnDesktop">
+                <FieldLabel>PINFL</FieldLabel>
+                <TextEdit @bind-Text="@userDto.PINFL">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
+            </Field>
+        </Validation>
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is2">
+                <FieldLabel>Pasport seria number</FieldLabel>
+                <div class="d-flex">
+                    <TextEdit @bind-Text="@userDto.PassportSeriaNumber">
+                    </TextEdit>
+                    <TextEdit @bind-Text="@userDto.PassportSeriaNumber">
+                    </TextEdit>
+                </div>
+            </Field>
+        </Validation>
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is2">
+                <FieldLabel>Born Date</FieldLabel>
+                <DateEdit @bind-Date="@userDto.BornDate">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </DateEdit>
+            </Field>
+        </Validation>
+        <Validation Validator="IsValid">
+            <Field ColumnSize="ColumnSize.Is3">
+                <FieldLabel>Given By</FieldLabel>
+                <TextEdit @bind-Text="@userDto.GivenBy"></TextEdit>
+            </Field>
+        </Validation>
+        <Validation Validator="IsValid">
+            <Field ColumnSize="ColumnSize.Is3">
+                <FieldLabel>Given Date</FieldLabel>
+                <DateEdit @bind-Date="@userDto.GivenDate"></DateEdit>
+            </Field>
+        </Validation>
+    </div>
+    <div class="row top-10">
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is3">
+                <FieldLabel>Last Name</FieldLabel>
+                <TextEdit @bind-Text="@userDto.LastName">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
+            </Field>
+        </Validation>
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is3">
+                <FieldLabel>FirstName</FieldLabel>
+                <TextEdit @bind-Text="@userDto.FirstName">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
+            </Field>
+        </Validation>
+        <Validation Validator="IsValid">
+            <Field ColumnSize="ColumnSize.Is3.OnDesktop">
+                <FieldLabel>MiddleName</FieldLabel>
+                <TextEdit @bind-Text="@userDto.MiddleName">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
+            </Field>
+        </Validation>
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is3">
+                <FieldLabel>Gender</FieldLabel>
+                <RadioGroup TValue="EGender" @bind-CheckedValue="userDto.Gender" Name="gender">
+                    <div class="d-flex">
+                        <Radio Style="margin-right: 5px" Value="@EGender.Male">Male</Radio>
+                        <Radio Value="@EGender.Female">Female</Radio>
+                    </div>
+                </RadioGroup>
+            </Field>
+        </Validation>
+    </div>
+
+    <div class="row top-10">
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is4">
+                <FieldLabel>Country</FieldLabel>
+                <TextEdit @bind-Text="@userDto.Country"></TextEdit>
+            </Field>
+        </Validation>
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is4">
+                <FieldLabel>Region</FieldLabel>
+                <TextEdit @bind-Text="@userDto.Region">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
+            </Field>
+        </Validation>
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is4">
+                <FieldLabel>City</FieldLabel>
+                <TextEdit @bind-Text="@userDto.City">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
+            </Field>
+        </Validation>
+    </div>
+    <div class="row top-10">
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is6">
+                <FieldLabel>Address</FieldLabel>
+                <TextEdit @bind-Text="@userDto.Adress">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
+            </Field>
+        </Validation>
+        <Validation>
+            <Field ColumnSize="ColumnSize.Is3">
+                <FieldLabel>Contact</FieldLabel>
+                <TextEdit Role="@TextRole.Telephone" @bind-Text="@userDto.Contact">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
+            </Field>
+        </Validation>
+        <Validation Validator="ValidationRule.">
+            <Field ColumnSize="ColumnSize.Is3">
+                <FieldLabel>E-mail</FieldLabel>
+                <TextEdit @bind-Text="@userDto.Email"></TextEdit>
+            </Field>
+        </Validation>
+    </div>
+</Validations>
+
+
+@code {
+    private UserDTO userDto = new();
+    private Validations _validations = new Validations();
+
+    void IsValid(ValidatorEventArgs e)
+    {
+        var value = Convert.ToString(e.Value);
+        if (string.IsNullOrEmpty(value))
+        {
+            e.Status = (userDto.Citizenship == ECitizenship.Resident) ? ValidationStatus.Error : ValidationStatus.None;
+            return;
+        }
+        e.Status = ValidationStatus.None;
+        StateHasChanged();
+    }
+
+
+    private void UpdateCitizenship(ChangeEventArgs e)
+    {
+        userDto.Citizenship = (ECitizenship)Enum.Parse(typeof(ECitizenship), e.Value.ToString());
+        Reset();
+    }
+
+
+    void ValidateEmail(ValidatorEventArgs e)
+    {
+        StateHasChanged();
+        var email = Convert.ToString(e.Value);
+        if (string.IsNullOrEmpty(email))
+        {
+            e.Status = ValidationStatus.None;
+        }
+        else
+        {
+            e.Status = email.Contains("@") ? ValidationStatus.Success : ValidationStatus.Error;
+        }
+    }
+
+    public void Reset()
+    {
+        _validations.ClearAll();
+        _validations.ValidateAll();
+        StateHasChanged();
+    }
+
+
+}
+
+<style>
+    .top-10 {
+        margin-top: 10px;
+    }
+</style>

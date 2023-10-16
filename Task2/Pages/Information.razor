@@ -1,0 +1,54 @@
+﻿@page "/information";
+@using Blazorise;
+
+<h5>Owner information</h5>
+
+<Div Style="justify-content:center">
+    <Button Color="Color.Primary">Person</Button>
+  @*<Button Style="margin-right:10px  display:inline-block" Color="Color.Secondary">Organization</Button>*@
+    <Button Color="Color.Secondary">Clear</Button>
+    <Select Style="font-size:20px" @bind-SelectedValue="@selectedValue">
+        @foreach (var choose in Chooses)
+        {
+            <SelectItem Style="justify-content:flex-end">@choose</SelectItem>
+        }
+    </Select>
+</Div>
+<Fields>
+    <Field ColumnSize="ColumnSize.Is6.OnDesktop">
+        <FieldLabel>City</FieldLabel>
+        <TextEdit />
+    </Field>
+    <Field ColumnSize="ColumnSize.Is4.OnDesktop">
+        <FieldLabel>State</FieldLabel>
+        <Select TValue="string">
+        </Select>
+    </Field>
+    <Field ColumnSize="ColumnSize.Is2.OnDesktop">
+        <FieldLabel>Zip</FieldLabel>
+        <TextEdit />
+    </Field>
+</Fields>
+
+
+
+
+@code {
+
+    private int selectedValue;
+    private List<string> Chooses { get; set; }
+    protected override void OnInitialized()
+    {
+        Chooses = new List<string>()
+        {
+            "Resident",
+            "Forigner",
+            "Military",
+            "Foregn Resident",
+            "WithOut citizenship"
+        };
+        base.OnInitialized();
+    }
+
+}
+
