@@ -9,16 +9,16 @@
 <div class=" row top-10">
     <div class="col-2">
         <div class="d-flex">
-            <Button Color="Color.Secondary">Person</Button>
-            <Button Color="Color.Primary">Organization</Button>
+            <Button style="background-color: #043952 ; color: #FFFFFF">Person</Button>
+            <Button class="button-margin" style="background-color: #F5F5F5 ; border:1px solid  #D9D7DC;">Organization</Button>
         </div>
     </div>
-    <div class="col-8">
+    <div class="col-7">
     </div>
-    <div class="col-2">
+    <div class="col-3">
         <div class="d-flex">
-            <Button Color="Color.Default">Clear</Button>
-            <Select TValue="ECitizenship" @bind-Text="userDto.Citizenship" @oninput="UpdateCitizenship">
+            <Button style="background-color: #FFFFFF;color: #DC357A ; border: 1px solid #DC357A">Clear</Button>
+            <Select class="button-margin"  style="background-color: #FFFFFF ; border:1px solid  #D9D7DC; border-radius: 2px" TValue="ECitizenship" @bind-Text="userDto.Citizenship" @oninput="UpdateCitizenship">
                 <SelectItem Value="@ECitizenship.Resident">Resident</SelectItem>
                 <SelectItem Value="@ECitizenship.Foreign_Resident">Foreign Resident</SelectItem>
             </Select>
@@ -32,7 +32,7 @@
                 <FieldLabel>PINFL</FieldLabel>
                 <TextEdit @bind-Text="@userDto.PINFL">
                     <Feedback>
-                        <ValidationError />
+                        <ValidationError/>
                     </Feedback>
                 </TextEdit>
             </Field>
@@ -53,7 +53,7 @@
                 <FieldLabel>Born Date</FieldLabel>
                 <DateEdit @bind-Date="@userDto.BornDate">
                     <Feedback>
-                        <ValidationError />
+                        <ValidationError/>
                     </Feedback>
                 </DateEdit>
             </Field>
@@ -77,7 +77,7 @@
                 <FieldLabel>Last Name</FieldLabel>
                 <TextEdit @bind-Text="@userDto.LastName">
                     <Feedback>
-                        <ValidationError />
+                        <ValidationError/>
                     </Feedback>
                 </TextEdit>
             </Field>
@@ -87,7 +87,7 @@
                 <FieldLabel>FirstName</FieldLabel>
                 <TextEdit @bind-Text="@userDto.FirstName">
                     <Feedback>
-                        <ValidationError />
+                        <ValidationError/>
                     </Feedback>
                 </TextEdit>
             </Field>
@@ -97,7 +97,7 @@
                 <FieldLabel>MiddleName</FieldLabel>
                 <TextEdit @bind-Text="@userDto.MiddleName">
                     <Feedback>
-                        <ValidationError />
+                        <ValidationError/>
                     </Feedback>
                 </TextEdit>
             </Field>
@@ -127,7 +127,7 @@
                 <FieldLabel>Region</FieldLabel>
                 <TextEdit @bind-Text="@userDto.Region">
                     <Feedback>
-                        <ValidationError />
+                        <ValidationError/>
                     </Feedback>
                 </TextEdit>
             </Field>
@@ -137,7 +137,7 @@
                 <FieldLabel>City</FieldLabel>
                 <TextEdit @bind-Text="@userDto.City">
                     <Feedback>
-                        <ValidationError />
+                        <ValidationError/>
                     </Feedback>
                 </TextEdit>
             </Field>
@@ -149,7 +149,7 @@
                 <FieldLabel>Address</FieldLabel>
                 <TextEdit @bind-Text="@userDto.Adress">
                     <Feedback>
-                        <ValidationError />
+                        <ValidationError/>
                     </Feedback>
                 </TextEdit>
             </Field>
@@ -159,7 +159,7 @@
                 <FieldLabel>Contact</FieldLabel>
                 <TextEdit Role="@TextRole.Telephone" @bind-Text="@userDto.Contact">
                     <Feedback>
-                        <ValidationError />
+                        <ValidationError>Invalid phone number</ValidationError>
                     </Feedback>
                 </TextEdit>
             </Field>
@@ -218,10 +218,14 @@
         _validations.ValidateAll();
         StateHasChanged();
     }
+
 }
 
 <style>
     .top-10 {
         margin-top: 10px;
+    }
+    .button-margin{
+    margin-left: 15px;
     }
 </style>

@@ -30,8 +30,8 @@
                 <Field ColumnSize="ColumnSize.Is3">
                     <FieldLabel Style="text-align: center">Pasport seriya nomeri </FieldLabel>
                     <div class="d-flex">
-                        <TextEdit @bind-Text="@_personDto.PasportSeriaNumber"></TextEdit>
-                        <TextEdit @bind-Text="@_personDto.PasportSeriaNumber"></TextEdit>
+                        <TextEdit @bind-Text="@_personDto.PasportSeria.Number"></TextEdit>
+                        <TextEdit @bind-Text="@_personDto.PasportSeria.Seria"></TextEdit>
                     </div>
                 </Field>
             </Validation>
@@ -44,8 +44,8 @@
             <Field ColumnSize="ColumnSize.Is3">
                 <FieldLabel></FieldLabel>
                 <div class="d-flex">
-                    <Button Color="Color.Primary">Qidirish</Button>
-                    <Button Style="margin-left: 13px" Color="Color.Warning">Aniqlash</Button>
+                    <Button style="background-color: #043952 ; color: #FFFFFF">Qidirish</Button>
+                    <Button Style="margin-left: 13px; background-color: #82858A ; border:1px solid #81868C" value="0">Aniqlash</Button>
                 </div>
             </Field>
         </div>
@@ -76,10 +76,10 @@
             </Field>
 
             <Field ColumnSize="ColumnSize.Is3">
-                <FieldLabel>Koeffitsent</FieldLabel>
+                <FieldLabel >Koeffitsent</FieldLabel>
                 <div class="d-flex">
-                    <Button Width="Width.Is25" Color="Color.Primary"></Button>
-                    <Button Style="margin-left: 33px" Color="Color.Danger">O'chirish</Button>
+                    <Button Style="background-color: #EFEFEF; border: 1px solid #81868C" Width="Width.Is25" Color="Color.Primary"></Button>
+                    <Button Style="margin-left: 33px ; background-color: #EA5455 ; color: #FFFFFF">O'chirish</Button>
                 </div>
             </Field>
         </div>

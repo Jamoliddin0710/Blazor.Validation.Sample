@@ -7,6 +7,6 @@ public class PersonDTO
     public string Patronymic { get; set; }
     public DateTime? BirthDate { get; set; }
     public string Age { get; set; }
-    public string PasportSeriaNumber { get; set; }
+    public PasportSeriaDTO PasportSeria { get; set; }
     public string PNFL { get; set; }
 }
